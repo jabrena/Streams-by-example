@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Java 8 // STREAM API by Breña</title>
+
+    <meta name="description" content="A web presentation about STREAM API">
+    <meta name="author" content="Juan Antonio Breña Moral">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="./reveal.css">
+    <link rel="stylesheet" href="./black.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="./zenburn.css">
+</head>
+<body>
+    <div class="reveal">
+
+        <div class="slides">
+            <section>
+                <h1>STREAM API</h1>
+                <h3>Learning by Examples.</h3>
+                <i>Juan Antonio Breña Moral</i>
+            </section>
+
+            <section>
+                <h2>Agenda</h2>
+                <ol>
+                    <li>Introduction</li>
+                    <li>Monads</li>
+                    <li>Basic streams</li>
+                    <li>Parallel streams</li>
+                </ol>
+            </section>
+
+            <section data-background="https://media.giphy.com/media/26xBu3btXw0rzEs48/200.gif">
+            </section>
+
+            <section>
+                <section>
+                    <h2>Introduction</h2>
+                    <p>
+                        Streams are Monads.
+                        In functional programming, a monad is a structure that represents computations defined as sequences of steps.
+                        A type with a monad structure defines what it means to chain operations, or nest functions of that type together.
+                    </p>
+                    <p>
+                        <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html" target="_blank">Javadocs</a>
+                    </p>
+                </section>
+                <section>
+                    <h2>Example1.java</h2>
+                    <pre><code class="hljava" data-trim contenteditable>
+import java.util.Arrays;
+import java.util.List;
+
+public class Example1 {
+    public static void main(String[] args) {
+        List&lt;String&gt; myFirstStream
+            = Arrays.asList("a1", "a2", "b1", "c2", "c1");
+        myFirstStream.stream()
+            .filter(s -> s.startsWith("c"))
+            .map(String::toUpperCase)
+            .sorted()
+            .forEach(System.out::println);
+    }
+}
+                    </code></pre>
+                </section>
+
+                <section data-background="https://media.giphy.com/media/nmTePzsmqkf04/giphy.gif">
+                    <h1>Your turn!</h1>
+                </section>
+
+                <section>
+                    <h2>Monads operators</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>method</th>
+                                <th>Modified and type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>collect()</td>
+                                <td>&lt;R,A&gt; R</td>
+                            </tr>
+                            <tr>
+                                <td>count()</td>
+                                <td>long</td>
+                            </tr>
+                            <tr>
+                                <td>filter()</td>
+                                <td>Stream&lt;T&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>findFirst()</td>
+                                <td>Optional&lt;T&gt;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </section>
+            
+        </div>
+
+    </div>
+
+    <script src="./head.js"></script>
+    <script src="./reveal.js"></script>
+    <script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+                    { src: './marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: './markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: './highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+
+	</script>
+</body>
+</html>
