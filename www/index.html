@@ -45,18 +45,47 @@
                 <ol>
                     <li>Introduction</li>
                     <li>Data Sources</li>
-                    <li>Streams I</li>
-                    <li>Streams II</li>
-                    <li>Streams III</li>
+                    <li>Aggregate operations</li>
                 </ol>
             </section>
 
-            <section data-background="https://media.giphy.com/media/26xBu3btXw0rzEs48/200.gif">
+            <section data-background="./cat.gif">
             </section>
 
             <section>
                 <section>
                     <h2>Introduction</h2>
+                    <h3>Collections vs Streams</h3>
+                    <p>
+                        A collection is an in-memory data structure, which holds all the values that the data structure currently has—every element in the collection has to be computed before it can be added to the collection.
+                        In contrast, a stream is a conceptually fixed data structure in which elements are computed on demand.                    </p>
+                    <p>
+                        <a href="http://www.oracle.com/technetwork/articles/java/ma14-java-se-8-streams-2177646.html" target="_blank">Processing Data with Java SE 8 Streams, Part 1</a>
+                    </p>
+                </section>
+                <section>
+                    <h2>Example0.java</h2>
+                    <pre><code class="hljava" data-trim contenteditable>
+List<Transaction> groceryTransactions = new Arraylist<>();
+for(Transaction t: transactions){
+    if(t.getType() == Transaction.GROCERY){
+        groceryTransactions.add(t);
+    }
+}
+Collections.sort(groceryTransactions, new Comparator(){
+    public int compare(Transaction t1, Transaction t2){
+        return t2.getValue().compareTo(t1.getValue());
+    }
+});
+List<Integer> transactionIds = new ArrayList<>();
+for(Transaction t: groceryTransactions){
+    transactionsIds.add(t.getId());
+}
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Introduction</h2>
+                    <h3>Definition</h3>
                     <p>
                         Streams are Monads.
                         In functional programming, a monad is a structure that represents computations defined as sequences of steps.
@@ -86,7 +115,7 @@ public class Example1 {
                     </code></pre>
                 </section>
 
-                <section data-background="https://media.giphy.com/media/nmTePzsmqkf04/giphy.gif">
+                <section data-background="./clock.gif">
                     <h1>Your turn!</h1>
                 </section>
 
@@ -100,7 +129,7 @@ C2
 
                 <section>
                     <p>
-                        <img data-src="https://media.giphy.com/media/ebj632kkC4AQo/source.gif">
+                        <img data-src="./dicaprio.gif">
                     </p>
                 </section>
                 <!--
@@ -136,8 +165,127 @@ C2
                 -->
             </section>
             <section>
-                <h2>Data Sources</h2>
+                <section>
+                    <h2>Data Sources</h2>
+                    <h3>Lists</h3>
+                    <pre><code class="hljava" data-trim contenteditable>
+                        import java.util.Arrays;
+                        import java.util.List;
 
+                        public class Example3 {
+                        public static void main(String[] args) {
+                            Arrays.asList("a1", "a2", "a3")
+                                .stream()
+                                .findFirst()
+                                .ifPresent(System.out::println);
+                        }
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Data Sources</h2>
+                    <h3>Streams</h3>
+                    <pre><code class="hljava" data-trim contenteditable>
+                        import java.util.Arrays;
+                        import java.util.List;
+
+                        public class Example3 {
+                        public static void main(String[] args) {
+                            Stream.of("a1", "a2", "a3")
+                                .findFirst()
+                                .ifPresent(System.out::println);
+                        }
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Data Sources</h2>
+                    <h3>IntStream</h3>
+                    <pre><code class="hljava" data-trim contenteditable>
+                        import java.util.Arrays;
+                        import java.util.List;
+
+                        public class Example4 {
+                        public static void main(String[] args) {
+                            IntStream.range(1, 4)
+                                .forEach(System.out::println);
+                        }
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Data Sources</h2>
+                    <h3>Arrays</h3>
+                    <pre><code class="hljava" data-trim contenteditable>
+                        import java.util.Arrays;
+                        import java.util.List;
+
+                        public class Example5 {
+                        public static void main(String[] args) {
+                            Arrays.stream(new int[] {1, 2, 3})
+                                .map(n -> 2 * n + 1)
+                                .average()
+                                .ifPresent(System.out::println);
+                        }
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Aggregate operations</h2>
+                    <h3>Filter, Map & ForEach</h3>
+                        <pre><code class="hljava" data-trim contenteditable>
+import java.util.Arrays;
+import java.util.List;
+
+public class Example5 {
+public static void main(String[] args) {
+    Stream.of("d2", "a2", "b1", "b3", "c")
+        .filter(s -> {
+            return s.startsWith("a");
+        })
+        .map(s -> {
+            return s.toUpperCase();
+        })
+        .forEach(s -> System.out.println("forEach: " + s));
+        }
+}
+                        </code></pre>
+                </section>
+                <section>
+                    <h2>Aggregate operations</h2>
+                    <h3>Filter, Map & ForEach</h3>
+                        <pre><code class="hljava" data-trim contenteditable>
+import java.util.Arrays;
+import java.util.List;
+
+public class Example5 {
+    public static void main(String[] args) {
+                            Stream.of("d2", "a2", "b1", "b3", "c")
+                            .filter(s -> {
+                            System.out.println("filter: " + s);
+                            return s.startsWith("a");
+                            })
+                            .sorted((s1, s2) -> {
+                            System.out.printf("sort: %s; %s\n", s1, s2);
+                            return s1.compareTo(s2);
+                            })
+                            .map(s -> {
+                            System.out.println("map: " + s);
+                            return s.toUpperCase();
+                            })
+                            .forEach(s -> System.out.println("forEach: " + s));
+}
+                        </code></pre>
+                </section>
+                <section>
+                    <h2>Aggregate operations</h2>
+                    <h3>Collector</h3>
+                        <pre><code class="hljava" data-trim contenteditable>
+                            List<Person> filtered =
+                            persons
+                            .stream()
+                            .filter(p -> p.name.startsWith("P"))
+                            .collect(Collectors.toList());
+                        </code></pre>
+                </section>
             </section>
             <section>
                 <h2>Thanks</h2>
