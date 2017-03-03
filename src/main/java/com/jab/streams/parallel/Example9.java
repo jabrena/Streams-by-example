@@ -1,3 +1,5 @@
+package com.jab.streams.parallel;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
