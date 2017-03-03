@@ -141,6 +141,15 @@ C2
             <section>
                 <section>
                     <h2>Data Sources</h2>
+                    <p>
+                        <img data-src="./Images/treasure.gif" width="40%">
+                    </p>
+                    <p>
+                        <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html" target="_blank">Javadocs</a>
+                    </p>
+                </section>            
+                <section>
+                    <h2>Data Sources</h2>
                     <h3>Lists</h3>
                     <pre><code class="hljava" data-trim contenteditable>
 import java.util.Arrays;
@@ -221,7 +230,7 @@ public class Example5 {
             <section>
                 <section>
                     <h2>Aggregate operations</h2>
-                    <h3>Filter, Map & ForEach</h3>
+                    <h3>Filter, Map &amp; ForEach</h3>
                         <pre><code class="hljava" data-trim contenteditable>
 import java.util.stream.Stream;
 
@@ -332,8 +341,15 @@ public class Example8_2 {
                 </section>
             </section>
             <section>
-                <h2>Parallel Stream</h2>
-                <pre><code class="hljava" data-trim contenteditable>
+                <section>
+                    <h2>Parallel Stream</h2>
+                    <p>
+                        <img data-src="./Images/stream_parallel.png" width="80%">
+                    </p>
+                </section>             
+                <section>
+                    <h2>Parallel Stream</h2>                
+                    <pre><code class="hljava" data-trim contenteditable>
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -349,7 +365,8 @@ public class Example9 {
             .forEach(e -> System.out.println(Thread.currentThread() + " " + e + " "));
     }
 }
-                </code></pre>
+                    </code></pre>
+                </section> 
             </section>
             <section>
                 <h2>Exception handling</h2>
